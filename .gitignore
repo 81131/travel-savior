@@ -1,0 +1,12 @@
+# .NET
+server/bin/
+server/obj/
+
+# Node
+client/node_modules/
+client/dist/
+
+# Environment & Secrets
+**/appsettings.Development.json
+**/.env
+*.user
