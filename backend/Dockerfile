@@ -17,9 +17,9 @@ WORKDIR /app
 # Copy the published files from the build stage
 COPY --from=build /app/publish .
 
-# .NET 8 default container port is 8080. We expose it for Render.
+# Railway injects $PORT at runtime; Program.cs reads it with Environment.GetEnvironmentVariable("PORT").
+# We expose 8080 as a documentation hint only — the actual port is dynamic.
 EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
 
 # The entry point commands Render to start the API
 ENTRYPOINT ["dotnet", "backend.dll"]
