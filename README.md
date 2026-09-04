@@ -77,5 +77,3 @@ This project is configured to be easily deployed to platforms like **Railway**.
 - **Backend:** The `Program.cs` is configured to automatically parse Railway's `DATABASE_URL` environment variable for seamless PostgreSQL integration. Make sure the Start Command in Railway is left blank (Nixpacks will automatically use the correct build output).
 - **Frontend:** Can be deployed to Vercel, Netlify, or Railway using standard Node.js build commands (`npm run build`).
 
-## 👥 Contributors
-- [Your Name/Team] - SLIIT Year 3 Semester 1
