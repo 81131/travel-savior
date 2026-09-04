@@ -1,10 +1,10 @@
 # .NET
-server/bin/
-server/obj/
+backend/bin/
+backend/obj/
 
 # Node
-client/node_modules/
-client/dist/
+frontend/node_modules/
+frontend/dist/
 
 # Environment & Secrets
 **/appsettings.Development.json
