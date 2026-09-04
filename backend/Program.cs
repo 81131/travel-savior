@@ -25,8 +25,24 @@ builder.Services.AddScoped<IBudgetService, BudgetService>();
 builder.Services.AddScoped<IAuthService, AuthService>(); // NEW LINE ADDED
 
 // 2. Register PostgreSQL Database Context
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+if (string.IsNullOrEmpty(connectionString))
+{
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+}
+else
+{
+    // Parse the URL format postgres://user:password@host:port/dbname if needed
+    if (connectionString.StartsWith("postgres://") || connectionString.StartsWith("postgresql://"))
+    {
+        var uri = new Uri(connectionString);
+        var userInfo = uri.UserInfo.Split(':');
+        connectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;";
+    }
+}
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 // 3. Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("Jwt");
