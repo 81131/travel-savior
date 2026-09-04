@@ -25,4 +25,4 @@ RUN npm install -g serve
 COPY --from=build /app/dist ./dist
 
 # Railway injects $PORT at runtime; pass it to serve via -l
-CMD ["sh", "-c", "serve -s dist -l ${PORT:-3000}"]
+CMD ["sh", "-c", "serve -s dist -l tcp://0.0.0.0:${PORT:-3000}"]
